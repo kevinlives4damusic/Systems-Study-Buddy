@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRoute, useLocation } from "wouter";
-import { ChevronLeft, ChevronRight, CheckCircle2, BookOpen, Lightbulb, KeyRound, List, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, CheckCircle2, BookOpen, Lightbulb, KeyRound, List, X, Layers } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -77,6 +77,10 @@ export default function Learn() {
               <CheckCircle2 className="w-3.5 h-3.5" /><span>Unit studied</span>
             </div>
           )}
+          <Button variant="default" size="sm" className="w-full text-xs gap-1.5"
+            onClick={() => setLocation(`/flashcards/${unitId}`)}>
+            <Layers className="w-3.5 h-3.5" /> Flashcard Review
+          </Button>
           <Button variant="outline" size="sm" className="w-full text-xs"
             onClick={() => setLocation(`/practice/${unitId}`)} data-testid="btn-go-to-practice">
             Practice Exercises
@@ -189,9 +193,13 @@ export default function Learn() {
               </div>
             )}
 
-            {/* Mobile-only practice link */}
-            <div className="md:hidden">
-              <Button variant="outline" size="sm" className="w-full text-xs mt-2"
+            {/* Mobile-only actions */}
+            <div className="md:hidden flex flex-col gap-2 mt-4">
+              <Button size="sm" className="w-full gap-2"
+                onClick={() => setLocation(`/flashcards/${unitId}`)}>
+                <Layers className="w-4 h-4" /> Flashcard Review
+              </Button>
+              <Button variant="outline" size="sm" className="w-full text-xs"
                 onClick={() => setLocation(`/practice/${unitId}`)}>
                 Go to Practice Exercises
               </Button>
