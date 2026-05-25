@@ -114,14 +114,14 @@ export const UNITS: LearningUnit[] = [
       {
         id: "lu1-e1",
         type: "classify",
-        question: "Hire-a-Nanny is building a new system. Classify each of these statements as either 'Systems Analysis' or 'Systems Design'.",
+        question: "LibraryPro is building a new online library management system. Classify each statement as either 'Systems Analysis' (WHAT) or 'Systems Design' (HOW).",
         items: [
-          "The system must allow parents to book a nanny 24/7",
-          "The booking form will have fields for date, time, and location",
-          "Parents need to receive confirmation notifications",
-          "The database will use a Bookings table with a foreign key to the Parent table",
-          "The system must store nanny qualifications",
-          "Authentication will use bcrypt password hashing"
+          "Members must be able to search the catalogue by author, title, and genre",
+          "The search results page will display book cover thumbnails and a 'Reserve' button",
+          "The system must store each member's borrowing history and contact details",
+          "Overdue notices will be sent via email using a nightly scheduled job",
+          "The database will have a Loans table with a foreign key linking to the Members table",
+          "Authentication will use a hashed password stored in the Members table"
         ],
         categories: ["Systems Analysis (WHAT)", "Systems Design (HOW)"]
       },
@@ -236,28 +236,28 @@ export const UNITS: LearningUnit[] = [
       {
         id: "lu2-e1",
         type: "classify",
-        question: "The Hire-a-Nanny system description says: 'The system must be available 24/7. Parents must be able to make bookings at any time. The data must be password protected. The nanny must be able to manage their availability. The system must respond to searches within 2 seconds.' Classify each as Functional or Non-Functional.",
+        question: "CampusConnect is a new university student portal. Classify each requirement as Functional or Non-Functional.",
         items: [
-          "The system must be available 24/7",
-          "A parent must be able to make a booking at any time",
-          "All personal data must be password protected",
-          "A nanny must be able to manage their availability",
-          "The system must respond to searches within 2 seconds",
-          "The system must store payment information"
+          "A student must be able to register for modules online",
+          "The portal must be available 24/7 during registration periods",
+          "A lecturer must be able to upload course materials and announcements",
+          "The system must load any page within 3 seconds on a standard broadband connection",
+          "All student academic records must be encrypted at rest",
+          "The system must send email notifications when final results are published"
         ],
         categories: ["Functional Requirement", "Non-Functional Requirement"]
       },
       {
         id: "lu2-e2",
         type: "classify",
-        question: "For the Hire-a-Nanny system, classify each stakeholder as Internal or External.",
+        question: "MediBook is a new hospital appointment booking system. Classify each stakeholder as Internal or External.",
         items: [
-          "Company Management",
-          "Parents hiring nannies",
-          "Nannies offering services",
-          "The IT development team",
-          "Payment gateway provider",
-          "Childcare regulatory authority"
+          "Hospital Management",
+          "Patients booking appointments",
+          "General Practitioners (doctors)",
+          "The hospital IT development team",
+          "Medical aid / insurance providers",
+          "National Department of Health (regulatory body)"
         ],
         categories: ["Internal Stakeholder", "External Stakeholder"]
       },
@@ -286,9 +286,9 @@ export const UNITS: LearningUnit[] = [
       {
         id: "lu2-e5",
         type: "short-answer",
-        question: "Using the User Goal Technique, identify THREE use cases for the 'Parent' actor in the Hire-a-Nanny system. For each use case, state the actor, the goal, and the resulting use case name. (6 marks)",
-        modelAnswer: "User Goal Technique applied to the Parent actor:\n\n1. Actor: Parent | Goal: Find and hire a qualified nanny | Use Case: 'Make Booking' or 'Book Nanny'\n\n2. Actor: Parent | Goal: Check whether their booking has been confirmed | Use Case: 'Track Booking Confirmation'\n\n3. Actor: Parent | Goal: Keep their contact details up to date | Use Case: 'Update Contact Details'\n\n(Other valid answers: 'View Nanny Profile', 'Cancel Booking', 'Download Statement of Account')\n\nThe technique works by: (1) identifying all actor types, (2) listing what each actor wants to achieve, (3) turning each goal into a named use case.",
-        hint: "Think about what a parent would need to DO with the system — each need is a use case"
+        question: "CityRide is a new app that allows commuters to book city bus and minibus taxi rides in advance. Using the User Goal Technique, identify THREE use cases for the 'Commuter' actor. For each use case, state the actor, the goal, and the resulting use case name. (6 marks)",
+        modelAnswer: "User Goal Technique applied to the Commuter actor:\n\n1. Actor: Commuter | Goal: Find a bus or taxi going to their destination at a specific time | Use Case: 'Search Available Rides'\n\n2. Actor: Commuter | Goal: Reserve a seat on a chosen ride so it is guaranteed | Use Case: 'Book Ride' or 'Reserve Seat'\n\n3. Actor: Commuter | Goal: Check whether their booked ride is still on schedule | Use Case: 'Track Ride Status'\n\n(Other valid answers: 'Cancel Booking', 'View Booking History', 'Update Payment Details', 'Rate Driver')\n\nThe technique works by: (1) identifying all actor types, (2) listing what each actor wants to achieve with the system, (3) turning each distinct goal into a named use case.",
+        hint: "Think about what a commuter needs to DO with the app from the moment they plan a trip to after they arrive"
       }
     ]
   },
@@ -376,14 +376,14 @@ export const UNITS: LearningUnit[] = [
       {
         id: "lu3-e2",
         type: "classify",
-        question: "Identify whether each scenario describes a Visibility problem, an Affordance problem, or Good Design.",
+        question: "ShopEasy is an e-commerce platform. Classify each UI scenario as a Visibility Problem, an Affordance Problem, or Good Design.",
         items: [
-          "The 'Cancel Booking' button is buried inside Account Settings > History",
-          "A clickable link is styled as plain black text with no underline",
-          "A 'Book Now' button is prominently displayed on every nanny's profile",
-          "The booking confirmation status is shown with a green tick at the top of the screen",
-          "The search filters are hidden until users click an invisible icon",
-          "A text input field has a visible border and placeholder text"
+          "The 'Add to Cart' button is only visible after scrolling past all product reviews",
+          "A 'Buy Now' link is styled as plain grey text with no underline or border",
+          "The checkout progress indicator clearly shows 'Step 2 of 4' at the top of the page",
+          "Product images show a small zoom icon on hover, indicating they can be enlarged",
+          "The order tracking feature is hidden under Account > Settings > Orders > History",
+          "The currency selector has a visible dropdown arrow showing it can be expanded"
         ],
         categories: ["Visibility Problem", "Affordance Problem", "Good Design"]
       },
@@ -402,9 +402,9 @@ export const UNITS: LearningUnit[] = [
       {
         id: "lu3-e4",
         type: "short-answer",
-        question: "Describe TWO things you would take into consideration when designing the user interface for both Web and Mobile for the Hire-a-Nanny system. (4 marks)",
-        modelAnswer: "1. Screen Size and Information Density: On a desktop web browser, the booking form can display all fields (nanny details, date, time, location, payment) on a single screen. On mobile, the screen is smaller, so the form should be broken into steps (a wizard), showing only a few fields at a time. Text and buttons must be larger on mobile for readability and touch accuracy.\n\n2. Navigation Patterns: On the web version, a top navigation bar can provide direct links to Bookings, Nanny Profiles, and Account. On mobile, a bottom navigation bar or hamburger menu is more appropriate, as it's reachable with the thumb and follows mobile platform conventions. Touch targets must be at least 44px to accommodate finger input.\n\n(Other valid answers: bandwidth/performance considerations, touch vs mouse interaction differences, responsive design principles)",
-        hint: "Think about: how different is a 5-inch phone screen from a 15-inch laptop? How do users navigate differently?"
+        question: "FoodNow is a food delivery app used by customers to browse restaurants, place orders, and track deliveries. Describe TWO things you would consider when designing the user interface for both the Web and Mobile versions of FoodNow. (4 marks)",
+        modelAnswer: "1. Screen Size and Information Density: On a desktop browser, the FoodNow landing page can display a grid of restaurant cards, a search bar, filters, and promotional banners all on one screen. On mobile, the screen is much smaller, so only a search bar and a scrollable list of nearby restaurants should be visible without scrolling. The order flow should be a step-by-step wizard on mobile (choose restaurant → select items → checkout), whereas on web all steps can share a single wider layout.\n\n2. Navigation and Touch Input: The web version can use a top navigation bar with links to Home, My Orders, and Account. On mobile, a bottom navigation bar is more appropriate — it is within reach of the thumb and follows iOS/Android conventions. Additionally, all tappable elements (buttons, menu items) must be at least 44×44px on mobile to accommodate finger input accurately, whereas on web, smaller targets are acceptable since a mouse cursor is precise.\n\n(Other valid answers: bandwidth and image optimisation for mobile networks, push notifications for delivery tracking on mobile, responsive layout breakpoints)",
+        hint: "Think about: how are a 5-inch phone screen and a 15-inch laptop screen different? What happens to the menu and the order process?"
       }
     ]
   },
@@ -571,14 +571,14 @@ export const UNITS: LearningUnit[] = [
       {
         id: "lu5-e1",
         type: "classify",
-        question: "Classify each software testing activity into the correct test type.",
+        question: "SafePay is a new online banking system. Classify each testing activity into the correct test type.",
         items: [
-          "A developer tests the 'calculateBookingFee()' function with various inputs",
-          "The team checks that the booking module correctly updates the notification module",
-          "Stakeholders from Hire-a-Nanny verify the complete system meets their original requirements",
-          "The team simulates 5,000 simultaneous users to measure system response time",
-          "After fixing a bug in the login feature, all existing test cases are re-run",
-          "The full integrated system is tested against the complete requirements specification"
+          "A developer tests the 'calculateInterest()' function with various account balances",
+          "The team verifies that the transfer module correctly updates both sender and recipient account balances",
+          "Bank compliance officers confirm the complete system meets all regulatory requirements",
+          "The team simulates 10,000 simultaneous logins to measure authentication response time",
+          "After patching a security vulnerability, all 847 existing test cases are re-run",
+          "The fully assembled banking system is tested against the complete requirements specification"
         ],
         categories: ["Unit Testing", "Integration Testing", "System Testing", "UAT", "Performance Testing", "Regression Testing"]
       },
@@ -608,9 +608,9 @@ export const UNITS: LearningUnit[] = [
       {
         id: "lu5-e4",
         type: "short-answer",
-        question: "When a nanny registers with Hire-a-Nanny, she provides her name, surname, age, qualifications, and availability. Create a design class diagram for a class called 'Nanny'. Show: (a) five attributes with visibility and data type, and (b) five method signatures. (16 marks)",
-        modelAnswer: "┌──────────────────────────────────────┐\n│               Nanny                  │\n├──────────────────────────────────────┤\n│ - name: String                       │\n│ - surname: String                    │\n│ - age: Integer                       │\n│ - qualifications: String             │\n│ - availability: Boolean              │\n├──────────────────────────────────────┤\n│ + register(): void                   │\n│ + getName(): String                  │\n│ + getAvailability(): Boolean         │\n│ + setAvailability(avail: Boolean): void │\n│ + updateDetails(name: String, surname: String): void │\n└──────────────────────────────────────┘\n\nKey points:\n- All 5 attributes use private visibility (-)\n- Correct data types: String for text, Integer for numbers, Boolean for true/false\n- All 5 methods use public visibility (+)\n- Methods include the return type after the colon\n- Parameter names and types shown in brackets\n- void means the method returns nothing",
-        hint: "Remember the three compartments: class name | attributes (- name: Type) | methods (+ name(params): ReturnType)"
+        question: "When a doctor registers with MediBook, they provide their name, surname, specialisation, years of experience, and availability status. Create a design class diagram for a class called 'Doctor'. Show: (a) five attributes with visibility and data type, and (b) five method signatures with correct return types. (16 marks)",
+        modelAnswer: "┌──────────────────────────────────────────┐\n│                 Doctor                   │\n├──────────────────────────────────────────┤\n│ - name: String                           │\n│ - surname: String                        │\n│ - specialisation: String                 │\n│ - yearsExperience: Integer               │\n│ - available: Boolean                     │\n├──────────────────────────────────────────┤\n│ + register(): void                       │\n│ + getName(): String                      │\n│ + getSpecialisation(): String            │\n│ + isAvailable(): Boolean                 │\n│ + setAvailability(status: Boolean): void │\n└──────────────────────────────────────────┘\n\nKey points:\n- All 5 attributes use private visibility (-)\n- Correct data types: String for text fields, Integer for numeric values, Boolean for true/false flags\n- All 5 methods use public visibility (+)\n- Every method includes a return type after the colon\n- Getter methods return the type of the attribute they retrieve\n- void return type means the method performs an action but returns nothing\n- Parameters are written as: paramName: DataType inside the brackets",
+        hint: "Remember the three compartments: ClassName | - attributes: DataType | + methods(params): ReturnType. Use - for attributes, + for methods."
       }
     ]
   }

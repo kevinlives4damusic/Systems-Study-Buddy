@@ -1,4 +1,4 @@
-import { Link, useLocation } from "wouter";
+import { Link } from "wouter";
 import { BookOpen, FlaskConical, CheckCircle2, ArrowRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -7,18 +7,21 @@ import { useProgress } from "@/contexts/ProgressContext";
 import { UNITS } from "@/data/studyData";
 
 const unitColors = [
-  "border-blue-500/30 hover:border-blue-500/60",
-  "border-violet-500/30 hover:border-violet-500/60",
-  "border-emerald-500/30 hover:border-emerald-500/60",
-  "border-amber-500/30 hover:border-amber-500/60",
-  "border-rose-500/30 hover:border-rose-500/60",
+  "border-blue-200 hover:border-blue-400 hover:bg-blue-50/50",
+  "border-violet-200 hover:border-violet-400 hover:bg-violet-50/50",
+  "border-emerald-200 hover:border-emerald-400 hover:bg-emerald-50/50",
+  "border-amber-200 hover:border-amber-400 hover:bg-amber-50/50",
+  "border-rose-200 hover:border-rose-400 hover:bg-rose-50/50",
 ];
 const unitBadge = [
-  "bg-blue-500/20 text-blue-300 border-blue-500/30",
-  "bg-violet-500/20 text-violet-300 border-violet-500/30",
-  "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
-  "bg-amber-500/20 text-amber-300 border-amber-500/30",
-  "bg-rose-500/20 text-rose-300 border-rose-500/30",
+  "bg-blue-100 text-blue-700 border-blue-200",
+  "bg-violet-100 text-violet-700 border-violet-200",
+  "bg-emerald-100 text-emerald-700 border-emerald-200",
+  "bg-amber-100 text-amber-700 border-amber-200",
+  "bg-rose-100 text-rose-700 border-rose-200",
+];
+const unitAccent = [
+  "text-blue-600", "text-violet-600", "text-emerald-600", "text-amber-600", "text-rose-600",
 ];
 
 export default function UnitSelect({ mode }: { mode: "learn" | "practice" }) {
@@ -30,8 +33,8 @@ export default function UnitSelect({ mode }: { mode: "learn" | "practice" }) {
       <div className="flex items-center gap-3 mb-2">
         {isLearn
           ? <BookOpen className="w-6 h-6 text-primary" />
-          : <FlaskConical className="w-6 h-6 text-violet-400" />}
-        <h1 className="text-2xl font-bold">{isLearn ? "Learn" : "Practice"}</h1>
+          : <FlaskConical className="w-6 h-6 text-violet-600" />}
+        <h1 className="text-2xl font-bold text-foreground">{isLearn ? "Learn" : "Practice"}</h1>
       </div>
       <p className="text-muted-foreground text-sm mb-8">
         {isLearn
@@ -45,21 +48,20 @@ export default function UnitSelect({ mode }: { mode: "learn" | "practice" }) {
           const { correct, total } = getTotalExerciseScore(unit.id);
           const isStudied = unitProg.studied;
           const href = `/${mode}/${unit.id}`;
-
           return (
             <Link key={unit.id} href={href}>
-              <Card className={`border cursor-pointer transition-all ${unitColors[i]} bg-card/60`}>
+              <Card className={`border cursor-pointer transition-all ${unitColors[i]} bg-card shadow-sm`}>
                 <CardContent className="pt-4 pb-4">
                   <div className="flex items-center gap-4">
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
                         <Badge variant="outline" className={`text-xs ${unitBadge[i]}`}>LU{i + 1}</Badge>
-                        {isStudied && isLearn && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />}
+                        {isStudied && isLearn && <CheckCircle2 className={`w-3.5 h-3.5 ${unitAccent[i]}`} />}
                         {!isLearn && total > 0 && (
-                          <span className="text-xs text-muted-foreground">{correct}/{total} correct</span>
+                          <span className={`text-xs font-medium ${unitAccent[i]}`}>{correct}/{total} correct</span>
                         )}
                       </div>
-                      <h3 className="font-semibold text-sm">{unit.title}</h3>
+                      <h3 className="font-semibold text-sm text-foreground">{unit.title}</h3>
                       <p className="text-xs text-muted-foreground mt-0.5 line-clamp-1">{unit.description}</p>
                     </div>
                     <div className="shrink-0 flex items-center gap-3">

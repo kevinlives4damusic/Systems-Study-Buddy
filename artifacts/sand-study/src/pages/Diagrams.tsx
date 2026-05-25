@@ -133,34 +133,34 @@ function ClassDiagramBuilder() {
         </div>
         {showExample && <Badge variant="outline" className="text-xs mb-3 bg-amber-500/10 text-amber-300 border-amber-500/30">Worked example — Nanny class</Badge>}
 
-        <svg width={W} height={totalH} viewBox={`0 0 ${W} ${totalH}`} className="rounded-xl overflow-hidden border border-border" style={{ background: "hsl(222 47% 11%)" }}>
-          <rect x={0} y={0} width={W} height={headerH} fill="hsl(221 83% 28%/0.5)" />
-          <text x={W / 2} y={headerH / 2 + 5} textAnchor="middle" fill="white" fontSize={13} fontWeight="bold" fontFamily="Inter,sans-serif">{data.className || "ClassName"}</text>
-          <rect x={0} y={headerH} width={W} height={attrH} fill="hsl(222 47% 13%)" />
-          <line x1={0} y1={headerH} x2={W} y2={headerH} stroke="hsl(216 34% 22%)" strokeWidth={1} />
+        <svg width={W} height={totalH} viewBox={`0 0 ${W} ${totalH}`} className="rounded-xl overflow-hidden border border-slate-200" style={{ background: "white" }}>
+          <rect x={0} y={0} width={W} height={headerH} fill="#dbeafe" />
+          <text x={W / 2} y={headerH / 2 + 5} textAnchor="middle" fill="#1e3a6e" fontSize={13} fontWeight="bold" fontFamily="Inter,sans-serif">{data.className || "ClassName"}</text>
+          <rect x={0} y={headerH} width={W} height={attrH} fill="#f8fafc" />
+          <line x1={0} y1={headerH} x2={W} y2={headerH} stroke="#e2e8f0" strokeWidth={1} />
           {data.attributes.length === 0
-            ? <text x={PAD} y={headerH + ROW_H * 0.72} fill="hsl(215 20% 45%)" fontSize={11} fontFamily="Inter,sans-serif" fontStyle="italic">— no attributes —</text>
+            ? <text x={PAD} y={headerH + ROW_H * 0.72} fill="#94a3b8" fontSize={11} fontFamily="Inter,sans-serif" fontStyle="italic">— no attributes —</text>
             : data.attributes.map((a, i) => (
               <text key={a.id} x={PAD} y={headerH + 8 + (i + 0.7) * ROW_H} fontSize={12} fontFamily="'Menlo',monospace">
-                <tspan fill="hsl(217 91% 70%)">{a.visibility}</tspan>
-                <tspan fill="white"> {a.name || "?"}</tspan>
-                <tspan fill="hsl(215 20% 60%)">: </tspan>
-                <tspan fill="hsl(152 60% 60%)">{a.dataType}</tspan>
+                <tspan fill="#2563eb">{a.visibility}</tspan>
+                <tspan fill="#1e293b"> {a.name || "?"}</tspan>
+                <tspan fill="#64748b">: </tspan>
+                <tspan fill="#059669">{a.dataType}</tspan>
               </text>
             ))}
-          <rect x={0} y={headerH + attrH} width={W} height={methH} fill="hsl(222 47% 11%)" />
-          <line x1={0} y1={headerH + attrH} x2={W} y2={headerH + attrH} stroke="hsl(216 34% 22%)" strokeWidth={1} />
+          <rect x={0} y={headerH + attrH} width={W} height={methH} fill="white" />
+          <line x1={0} y1={headerH + attrH} x2={W} y2={headerH + attrH} stroke="#e2e8f0" strokeWidth={1} />
           {data.methods.length === 0
-            ? <text x={PAD} y={headerH + attrH + ROW_H * 0.72} fill="hsl(215 20% 45%)" fontSize={11} fontFamily="Inter,sans-serif" fontStyle="italic">— no methods —</text>
+            ? <text x={PAD} y={headerH + attrH + ROW_H * 0.72} fill="#94a3b8" fontSize={11} fontFamily="Inter,sans-serif" fontStyle="italic">— no methods —</text>
             : data.methods.map((m, i) => (
               <text key={m.id} x={PAD} y={headerH + attrH + 8 + (i + 0.7) * ROW_H} fontSize={12} fontFamily="'Menlo',monospace">
-                <tspan fill="hsl(217 91% 70%)">{m.visibility}</tspan>
-                <tspan fill="hsl(43 96% 68%)"> {m.name || "?"}</tspan>
-                <tspan fill="hsl(215 20% 60%)">({m.params}): </tspan>
-                <tspan fill="hsl(152 60% 60%)">{m.returnType}</tspan>
+                <tspan fill="#2563eb">{m.visibility}</tspan>
+                <tspan fill="#b45309"> {m.name || "?"}</tspan>
+                <tspan fill="#64748b">({m.params}): </tspan>
+                <tspan fill="#059669">{m.returnType}</tspan>
               </text>
             ))}
-          <rect x={0} y={0} width={W} height={totalH} fill="none" stroke="hsl(216 34% 22%)" strokeWidth={1} rx={4} />
+          <rect x={0} y={0} width={W} height={totalH} fill="none" stroke="#cbd5e1" strokeWidth={1} rx={4} />
         </svg>
       </div>
     </div>
