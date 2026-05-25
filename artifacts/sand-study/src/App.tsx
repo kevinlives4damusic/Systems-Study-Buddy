@@ -10,6 +10,7 @@ import Learn from "@/pages/Learn";
 import Practice from "@/pages/Practice";
 import Diagrams from "@/pages/Diagrams";
 import Exam from "@/pages/Exam";
+import UnitSelect from "@/pages/UnitSelect";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
@@ -19,10 +20,10 @@ function Router() {
     <Layout>
       <Switch>
         <Route path="/" component={Dashboard} />
+        <Route path="/learn" component={() => <UnitSelect mode="learn" />} />
         <Route path="/learn/:unitId" component={Learn} />
-        <Route path="/learn" component={() => { window.location.replace(import.meta.env.BASE_URL + "learn/lu1"); return null; }} />
+        <Route path="/practice" component={() => <UnitSelect mode="practice" />} />
         <Route path="/practice/:unitId" component={Practice} />
-        <Route path="/practice" component={() => { window.location.replace(import.meta.env.BASE_URL + "practice/lu1"); return null; }} />
         <Route path="/diagrams" component={Diagrams} />
         <Route path="/exam" component={Exam} />
         <Route component={NotFound} />
