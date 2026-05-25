@@ -6,9 +6,15 @@ export interface Concept {
   keyPoints?: string[];
 }
 
+export interface DiagramSlot {
+  id: string;
+  correctLabel: string;
+  hint?: string;
+}
+
 export interface Exercise {
   id: string;
-  type: "classify" | "order" | "match" | "fill-blank" | "short-answer";
+  type: "classify" | "order" | "match" | "fill-blank" | "short-answer" | "diagram-label";
   question: string;
   items?: string[];
   categories?: string[];
@@ -17,6 +23,15 @@ export interface Exercise {
   sentence?: string;
   modelAnswer?: string;
   hint?: string;
+  diagramType?: "class" | "usecase";
+  diagramSlots?: DiagramSlot[];
+  allLabels?: string[];
+  diagramClassName?: string;
+  diagramFixed?: { attributes?: string[]; methods?: string[] };
+  diagramActors?: Array<{ id: string; x: number; y: number; name?: string; slotId?: string }>;
+  diagramUseCases?: Array<{ id: string; x: number; y: number; name?: string; slotId?: string }>;
+  diagramConnections?: Array<[string, string]>;
+  diagramSystemLabel?: string;
 }
 
 export interface LearningUnit {
@@ -159,6 +174,29 @@ export const UNITS: LearningUnit[] = [
         question: "A company wants to build a new help desk system. Briefly explain how an iterative development approach would be applied. Mention at least one advantage over the predictive approach. (4 marks)",
         modelAnswer: "In an iterative approach, the help desk system would be built in cycles called iterations. In iteration 1, the core incident logging feature could be built and reviewed. In iteration 2, the technical report workflow could be added. In iteration 3, the supervisor approval flow and reporting features could be completed.\n\nEach iteration produces a working version of the system that stakeholders can review and provide feedback on, allowing requirements to be refined.\n\nAdvantage over predictive: Unlike the waterfall approach, the iterative approach allows requirements to change between iterations. Stakeholders can see working software early and request adjustments — rather than waiting until the end to discover the system doesn't meet their needs.",
         hint: "Think about: what gets built in each cycle, when stakeholders see results, and what happens if requirements change"
+      },
+      {
+        id: "lu1-e6",
+        type: "diagram-label",
+        diagramType: "class",
+        question: "Complete the UML Class Diagram for the 'Nanny' class. Drag the missing attributes and method signatures from the pool into the correct compartment of the diagram.",
+        diagramClassName: "Nanny",
+        diagramFixed: {
+          attributes: ["- age: Integer", "- qualifications: String"],
+          methods: ["+ getName(): String", "+ getQualifications(): String"]
+        },
+        diagramSlots: [
+          { id: "attr-name", correctLabel: "- name: String", hint: "private text attribute" },
+          { id: "attr-surname", correctLabel: "- surname: String", hint: "private text attribute" },
+          { id: "attr-avail", correctLabel: "- availability: Boolean", hint: "private true/false attribute" },
+          { id: "method-reg", correctLabel: "+ register(): void", hint: "public no-return method" },
+          { id: "method-setavail", correctLabel: "+ setAvailability(avail: Boolean): void", hint: "public setter method" }
+        ],
+        allLabels: [
+          "- name: String", "- surname: String", "- availability: Boolean",
+          "+ register(): void", "+ setAvailability(avail: Boolean): void",
+          "- id: Integer", "# password: String", "+ addBooking(): void", "+ isAvailable(): String"
+        ]
       }
     ]
   },
@@ -289,6 +327,45 @@ export const UNITS: LearningUnit[] = [
         question: "CityRide is a new app that allows commuters to book city bus and minibus taxi rides in advance. Using the User Goal Technique, identify THREE use cases for the 'Commuter' actor. For each use case, state the actor, the goal, and the resulting use case name. (6 marks)",
         modelAnswer: "User Goal Technique applied to the Commuter actor:\n\n1. Actor: Commuter | Goal: Find a bus or taxi going to their destination at a specific time | Use Case: 'Search Available Rides'\n\n2. Actor: Commuter | Goal: Reserve a seat on a chosen ride so it is guaranteed | Use Case: 'Book Ride' or 'Reserve Seat'\n\n3. Actor: Commuter | Goal: Check whether their booked ride is still on schedule | Use Case: 'Track Ride Status'\n\n(Other valid answers: 'Cancel Booking', 'View Booking History', 'Update Payment Details', 'Rate Driver')\n\nThe technique works by: (1) identifying all actor types, (2) listing what each actor wants to achieve with the system, (3) turning each distinct goal into a named use case.",
         hint: "Think about what a commuter needs to DO with the app from the moment they plan a trip to after they arrive"
+      },
+      {
+        id: "lu2-e6",
+        type: "diagram-label",
+        diagramType: "usecase",
+        question: "Complete the Use Case Diagram for the Hire-a-Nanny system. Drag the correct actor names and use case names from the pool to their blank slots.",
+        diagramSystemLabel: "Hire-a-Nanny System",
+        diagramActors: [
+          { id: "a-parent", x: 50, y: 130, name: "Parent" },
+          { id: "a-nanny", x: 50, y: 275, slotId: "actor-nanny" },
+          { id: "a-manager", x: 540, y: 80, name: "Manager" }
+        ],
+        diagramUseCases: [
+          { id: "u1", x: 195, y: 75, slotId: "uc-search" },
+          { id: "u2", x: 195, y: 145, name: "Make Booking" },
+          { id: "u3", x: 195, y: 215, slotId: "uc-track" },
+          { id: "u4", x: 340, y: 145, name: "Authenticate" },
+          { id: "u5", x: 410, y: 220, slotId: "uc-avail" },
+          { id: "u6", x: 410, y: 290, slotId: "uc-viewbk" },
+          { id: "u7", x: 490, y: 78, slotId: "uc-reports" }
+        ],
+        diagramConnections: [
+          ["a-parent", "u1"], ["a-parent", "u2"], ["a-parent", "u3"],
+          ["a-nanny", "u5"], ["a-nanny", "u6"],
+          ["a-manager", "u7"],
+          ["u2", "u4"]
+        ],
+        diagramSlots: [
+          { id: "actor-nanny", correctLabel: "Nanny", hint: "actor name" },
+          { id: "uc-search", correctLabel: "Search Nanny", hint: "use case name" },
+          { id: "uc-track", correctLabel: "Track Booking", hint: "use case name" },
+          { id: "uc-avail", correctLabel: "Manage Availability", hint: "use case name" },
+          { id: "uc-viewbk", correctLabel: "View Bookings", hint: "use case name" },
+          { id: "uc-reports", correctLabel: "Generate Reports", hint: "use case name" }
+        ],
+        allLabels: [
+          "Nanny", "Search Nanny", "Track Booking", "Manage Availability", "View Bookings", "Generate Reports",
+          "Cancel Booking", "Pay Nanny", "Admin", "Register User"
+        ]
       }
     ]
   },

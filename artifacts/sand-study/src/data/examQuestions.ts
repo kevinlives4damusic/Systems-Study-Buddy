@@ -1,3 +1,9 @@
+export interface DiagramSlot {
+  id: string;
+  correctLabel: string;
+  hint?: string;
+}
+
 export interface SubQuestion {
   id: string;
   number: string;
@@ -5,6 +11,12 @@ export interface SubQuestion {
   question: string;
   modelAnswer: string;
   keyPoints: string[];
+  type?: "text" | "diagram-label";
+  diagramType?: "class" | "usecase";
+  diagramClassName?: string;
+  diagramFixed?: { attributes?: string[]; methods?: string[] };
+  diagramSlots?: DiagramSlot[];
+  allLabels?: string[];
 }
 
 export interface ExamScenario {
@@ -273,6 +285,48 @@ export const EXAM_SCENARIOS: ExamScenario[] = [
               "1 mark per correctly named test type",
               "Any 3 of: Unit, Integration, System, UAT, Performance/Stress, Regression Testing",
               "Name alone is sufficient for full marks (description is optional)"
+            ]
+          }
+        ]
+      },
+      {
+        id: "exam1-q6",
+        number: "Diagram Practice",
+        totalMarks: 8,
+        subQuestions: [
+          {
+            id: "exam1-q6-1",
+            number: "D1",
+            marks: 8,
+            type: "diagram-label",
+            diagramType: "class",
+            question: "Complete the UML Class Diagram for the 'Booking' class. Drag the correct attributes (with visibility symbol and data type) and method signatures into the diagram.",
+            diagramClassName: "Booking",
+            diagramFixed: {
+              attributes: ["- bookingDate: Date", "- status: String"],
+              methods: ["+ getStatus(): String", "+ getBookingDate(): Date"]
+            },
+            diagramSlots: [
+              { id: "attr-parentId", correctLabel: "- parentId: Integer", hint: "FK to Parent (private)" },
+              { id: "attr-nannyId", correctLabel: "- nannyId: Integer", hint: "FK to Nanny (private)" },
+              { id: "attr-confirmed", correctLabel: "- confirmed: Boolean", hint: "confirmation flag (private)" },
+              { id: "method-confirm", correctLabel: "+ confirmBooking(): void", hint: "public no-return method" },
+              { id: "method-cancel", correctLabel: "+ cancelBooking(): void", hint: "public no-return method" },
+              { id: "method-getParent", correctLabel: "+ getParentId(): Integer", hint: "public getter method" }
+            ],
+            allLabels: [
+              "- parentId: Integer", "- nannyId: Integer", "- confirmed: Boolean",
+              "+ confirmBooking(): void", "+ cancelBooking(): void", "+ getParentId(): Integer",
+              "- id: String", "+ deleteBooking(): String", "# totalCost: Double", "+ setStatus(): Boolean"
+            ],
+            modelAnswer: "BOOKING CLASS DIAGRAM:\n\n┌─────────────────────────────────────────┐\n│                 Booking                 │\n├─────────────────────────────────────────┤\n│ - bookingDate: Date                     │\n│ - status: String                        │\n│ - parentId: Integer                     │\n│ - nannyId: Integer                      │\n│ - confirmed: Boolean                    │\n├─────────────────────────────────────────┤\n│ + getStatus(): String                   │\n│ + getBookingDate(): Date                │\n│ + confirmBooking(): void                │\n│ + cancelBooking(): void                 │\n│ + getParentId(): Integer                │\n└─────────────────────────────────────────┘",
+            keyPoints: [
+              "All attributes use private (-) visibility — encapsulation principle",
+              "All methods use public (+) visibility — accessible by other classes",
+              "Correct data types: Integer for IDs, Boolean for flag, Date for date",
+              "parentId and nannyId are foreign keys linking Booking to other classes",
+              "Method signatures always include return type after the colon",
+              "void means the method performs an action but returns no value"
             ]
           }
         ]
