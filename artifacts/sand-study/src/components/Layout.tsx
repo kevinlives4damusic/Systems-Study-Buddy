@@ -5,11 +5,11 @@ import { UNITS } from "@/data/studyData";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { href: "/", label: "Dashboard", icon: LayoutTemplate },
+  { href: "/", label: "Home", icon: LayoutTemplate },
   { href: "/learn", label: "Learn", icon: BookOpen },
   { href: "/practice", label: "Practice", icon: FlaskConical },
   { href: "/diagrams", label: "Diagrams", icon: PenLine },
-  { href: "/exam", label: "Exam Simulator", icon: GraduationCap },
+  { href: "/exam", label: "Exam", icon: GraduationCap },
 ];
 
 function XPBar({ xp }: { xp: number }) {
@@ -21,7 +21,6 @@ function XPBar({ xp }: { xp: number }) {
   const current = levels[level - 1] ?? 0;
   const next = levels[level] ?? levels[levels.length - 1];
   const pct = next > current ? Math.min(100, ((xp - current) / (next - current)) * 100) : 100;
-
   return (
     <div className="px-4 pb-4">
       <div className="flex justify-between text-xs text-muted-foreground mb-1">
@@ -29,24 +28,46 @@ function XPBar({ xp }: { xp: number }) {
         <span>{xp} XP</span>
       </div>
       <div className="h-1.5 bg-secondary rounded-full overflow-hidden">
-        <div
-          className="h-full bg-primary rounded-full transition-all duration-700"
-          style={{ width: `${pct}%` }}
-        />
+        <div className="h-full bg-primary rounded-full transition-all duration-700" style={{ width: `${pct}%` }} />
       </div>
     </div>
+  );
+}
+
+function MobileNav() {
+  const [location] = useLocation();
+  return (
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-t border-border"
+      style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}>
+      <div className="flex">
+        {navItems.map(({ href, label, icon: Icon }) => {
+          const active = href === "/" ? location === "/" : location.startsWith(href);
+          return (
+            <Link key={href} href={href} className="flex-1">
+              <div className={cn(
+                "flex flex-col items-center py-2 gap-0.5 transition-colors",
+                active ? "text-primary" : "text-muted-foreground"
+              )}>
+                <Icon className={cn("w-5 h-5 transition-transform", active && "scale-110")} />
+                <span className="text-[9px] font-medium">{label}</span>
+              </div>
+            </Link>
+          );
+        })}
+      </div>
+    </nav>
   );
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
   const { progress } = useProgress();
-
   const studiedCount = Object.values(progress.units).filter(u => u.studied).length;
 
   return (
     <div className="flex min-h-screen bg-background">
-      <aside className="w-60 shrink-0 border-r border-border flex flex-col bg-sidebar">
+      {/* Desktop sidebar */}
+      <aside className="hidden md:flex w-60 shrink-0 border-r border-border flex-col bg-sidebar">
         <div className="p-5 border-b border-border">
           <div className="flex items-center gap-2.5 mb-0.5">
             <div className="w-7 h-7 rounded-md bg-primary flex items-center justify-center">
@@ -56,7 +77,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
           <p className="text-xs text-muted-foreground mt-1 pl-9">Systems Analysis &amp; Design</p>
         </div>
-
         <div className="px-3 py-3 border-b border-border">
           <div className="flex items-center justify-between text-xs text-muted-foreground mb-1 px-1">
             <span>Units studied</span>
@@ -69,7 +89,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </div>
           )}
         </div>
-
         <nav className="flex-1 p-2 space-y-0.5">
           {navItems.map(({ href, label, icon: Icon }) => {
             const active = href === "/" ? location === "/" : location.startsWith(href);
@@ -91,13 +110,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             );
           })}
         </nav>
-
         <XPBar xp={progress.xp} />
       </aside>
 
-      <main className="flex-1 overflow-auto">
+      {/* Main content — adds bottom padding on mobile for the nav bar */}
+      <main className="flex-1 overflow-auto pb-16 md:pb-0">
         {children}
       </main>
+
+      <MobileNav />
     </div>
   );
 }

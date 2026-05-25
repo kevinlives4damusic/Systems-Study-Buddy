@@ -14,15 +14,7 @@ const unitColors = [
   "border-amber-200 bg-amber-50/40 hover:border-amber-300",
   "border-rose-200 bg-rose-50/40 hover:border-rose-300",
 ];
-
-const unitAccents = [
-  "text-blue-600",
-  "text-violet-600",
-  "text-emerald-600",
-  "text-amber-600",
-  "text-rose-600",
-];
-
+const unitAccents = ["text-blue-600", "text-violet-600", "text-emerald-600", "text-amber-600", "text-rose-600"];
 const unitBadgeColors = [
   "bg-blue-100 text-blue-700 border-blue-200",
   "bg-violet-100 text-violet-700 border-violet-200",
@@ -53,90 +45,90 @@ export default function Dashboard() {
   const lastStudied = UNITS.find(u => progress.units[u.id]?.studiedAt);
 
   return (
-    <div className="p-8 max-w-5xl mx-auto">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">Study Dashboard</h1>
-        <p className="text-muted-foreground mt-1">Systems Analysis &amp; Design — SAND6211/6221</p>
+    <div className="px-4 py-6 md:p-8 max-w-5xl mx-auto">
+      <div className="mb-6 md:mb-8">
+        <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground">Study Dashboard</h1>
+        <p className="text-muted-foreground text-sm mt-1">Systems Analysis &amp; Design — SAND6211/6221</p>
       </div>
 
-      {/* Stats row */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      {/* Stats */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6 md:mb-8">
         <Card className="border-border shadow-sm">
-          <CardContent className="pt-5 pb-5">
+          <CardContent className="pt-4 pb-4 md:pt-5 md:pb-5">
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-xs text-muted-foreground uppercase tracking-wide">Level</p>
+                <p className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-wide">Level</p>
                 <p className="text-2xl font-bold mt-0.5 text-foreground">{level}</p>
                 <p className="text-xs text-primary mt-0.5">{title}</p>
               </div>
-              <Trophy className="w-5 h-5 text-amber-500 mt-0.5" />
+              <Trophy className="w-4 h-4 md:w-5 md:h-5 text-amber-500 mt-0.5" />
             </div>
             <Progress value={levelPct} className="mt-3 h-1.5" />
-            <p className="text-xs text-muted-foreground mt-1">{xp} XP{next ? ` / ${next}` : ""}</p>
+            <p className="text-[10px] text-muted-foreground mt-1">{xp} XP{next ? ` / ${next}` : ""}</p>
           </CardContent>
         </Card>
 
         <Card className="border-border shadow-sm">
-          <CardContent className="pt-5 pb-5">
+          <CardContent className="pt-4 pb-4 md:pt-5 md:pb-5">
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-xs text-muted-foreground uppercase tracking-wide">Units Studied</p>
+                <p className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-wide">Units</p>
                 <p className="text-2xl font-bold mt-0.5 text-foreground">{studiedCount}<span className="text-sm text-muted-foreground font-normal">/{UNITS.length}</span></p>
-                <p className="text-xs text-muted-foreground mt-0.5">{UNITS.length - studiedCount} remaining</p>
+                <p className="text-[10px] md:text-xs text-muted-foreground mt-0.5">{UNITS.length - studiedCount} left</p>
               </div>
-              <BookOpen className="w-5 h-5 text-blue-500 mt-0.5" />
+              <BookOpen className="w-4 h-4 md:w-5 md:h-5 text-blue-500 mt-0.5" />
             </div>
             <Progress value={(studiedCount / UNITS.length) * 100} className="mt-3 h-1.5" />
           </CardContent>
         </Card>
 
         <Card className="border-border shadow-sm">
-          <CardContent className="pt-5 pb-5">
+          <CardContent className="pt-4 pb-4 md:pt-5 md:pb-5">
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-xs text-muted-foreground uppercase tracking-wide">Exercises Done</p>
+                <p className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-wide">Exercises</p>
                 <p className="text-2xl font-bold mt-0.5 text-foreground">{completedExercises}<span className="text-sm text-muted-foreground font-normal">/{totalExercises}</span></p>
-                <p className="text-xs text-muted-foreground mt-0.5">Interactive practice</p>
+                <p className="text-[10px] md:text-xs text-muted-foreground mt-0.5">done</p>
               </div>
-              <FlaskConical className="w-5 h-5 text-violet-500 mt-0.5" />
+              <FlaskConical className="w-4 h-4 md:w-5 md:h-5 text-violet-500 mt-0.5" />
             </div>
             <Progress value={(completedExercises / totalExercises) * 100} className="mt-3 h-1.5" />
           </CardContent>
         </Card>
 
         <Card className="border-border shadow-sm">
-          <CardContent className="pt-5 pb-5">
+          <CardContent className="pt-4 pb-4 md:pt-5 md:pb-5">
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-xs text-muted-foreground uppercase tracking-wide">Streak</p>
-                <p className="text-2xl font-bold mt-0.5 text-foreground">{streak}<span className="text-sm text-muted-foreground font-normal"> days</span></p>
-                <p className="text-xs text-muted-foreground mt-0.5">{examAttempted} exam Qs done</p>
+                <p className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-wide">Streak</p>
+                <p className="text-2xl font-bold mt-0.5 text-foreground">{streak}<span className="text-sm text-muted-foreground font-normal">d</span></p>
+                <p className="text-[10px] md:text-xs text-muted-foreground mt-0.5">{examAttempted} exam Qs</p>
               </div>
-              <RotateCcw className="w-5 h-5 text-emerald-500 mt-0.5" />
+              <RotateCcw className="w-4 h-4 md:w-5 md:h-5 text-emerald-500 mt-0.5" />
             </div>
           </CardContent>
         </Card>
       </div>
 
       {/* Quick actions */}
-      <div className="flex flex-wrap gap-3 mb-8">
+      <div className="flex flex-wrap gap-2 md:gap-3 mb-6 md:mb-8">
         {lastStudied ? (
           <Link href={`/learn/${lastStudied.id}`}>
-            <Button data-testid="btn-continue-learning" size="sm" className="gap-2">
+            <Button data-testid="btn-continue-learning" size="sm" className="gap-2 h-10 md:h-8">
               <BookOpen className="w-4 h-4" />
               Continue: {lastStudied.shortTitle}
             </Button>
           </Link>
         ) : (
           <Link href="/learn/lu1">
-            <Button data-testid="btn-start-learning" size="sm" className="gap-2">
+            <Button data-testid="btn-start-learning" size="sm" className="gap-2 h-10 md:h-8">
               <BookOpen className="w-4 h-4" />
               Start Learning
             </Button>
           </Link>
         )}
         <Link href="/exam">
-          <Button data-testid="btn-start-exam" variant="outline" size="sm" className="gap-2">
+          <Button data-testid="btn-start-exam" variant="outline" size="sm" className="gap-2 h-10 md:h-8">
             <GraduationCap className="w-4 h-4" />
             Exam Simulator
           </Button>
@@ -144,30 +136,29 @@ export default function Dashboard() {
       </div>
 
       {/* Units grid */}
-      <h2 className="text-lg font-semibold mb-4 text-foreground">Learning Units</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <h2 className="text-base md:text-lg font-semibold mb-3 md:mb-4 text-foreground">Learning Units</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
         {UNITS.map((unit, i) => {
           const unitProg = progress.units[unit.id];
           const { correct, total } = getTotalExerciseScore(unit.id);
           const isStudied = unitProg?.studied ?? false;
           const exercisePct = unit.exercises.length > 0 ? (total / unit.exercises.length) * 100 : 0;
-
           return (
             <Card key={unit.id} data-testid={`unit-card-${unit.id}`}
               className={`border ${unitColors[i]} transition-all shadow-sm`}>
-              <CardHeader className="pb-3">
+              <CardHeader className="pb-2 pt-4">
                 <div className="flex items-start justify-between">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
                       <Badge variant="outline" className={`text-xs px-2 py-0 ${unitBadgeColors[i]}`}>LU{i + 1}</Badge>
                       {isStudied && <CheckCircle2 className={`w-4 h-4 ${unitAccents[i]}`} />}
                     </div>
-                    <CardTitle className="text-base font-semibold leading-snug text-foreground">{unit.shortTitle}</CardTitle>
+                    <CardTitle className="text-sm font-semibold leading-snug text-foreground">{unit.shortTitle}</CardTitle>
                     <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{unit.description}</p>
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className="pt-0">
+              <CardContent className="pt-0 pb-4">
                 <div className="flex items-center gap-2 text-xs text-muted-foreground mb-3">
                   <Circle className="w-3 h-3" />
                   <span>{unit.concepts.length} concepts</span>
@@ -176,20 +167,20 @@ export default function Dashboard() {
                   {total > 0 && (
                     <>
                       <span className="text-border">·</span>
-                      <span className={unitAccents[i]}>{correct}/{total} correct</span>
+                      <span className={unitAccents[i]}>{correct}/{total} ✓</span>
                     </>
                   )}
                 </div>
                 {exercisePct > 0 && <Progress value={exercisePct} className="h-1.5 mb-3" />}
                 <div className="flex gap-2">
                   <Link href={`/learn/${unit.id}`}>
-                    <Button data-testid={`btn-learn-${unit.id}`} variant={isStudied ? "outline" : "default"} size="sm" className="gap-1.5 h-8 text-xs">
+                    <Button data-testid={`btn-learn-${unit.id}`} variant={isStudied ? "outline" : "default"} size="sm" className="gap-1.5 h-9 md:h-8 text-xs">
                       <BookOpen className="w-3.5 h-3.5" />
                       {isStudied ? "Review" : "Learn"}
                     </Button>
                   </Link>
                   <Link href={`/practice/${unit.id}`}>
-                    <Button data-testid={`btn-practice-${unit.id}`} variant="outline" size="sm" className="gap-1.5 h-8 text-xs">
+                    <Button data-testid={`btn-practice-${unit.id}`} variant="outline" size="sm" className="gap-1.5 h-9 md:h-8 text-xs">
                       <FlaskConical className="w-3.5 h-3.5" />
                       Practice
                     </Button>
@@ -201,16 +192,16 @@ export default function Dashboard() {
         })}
       </div>
 
-      <Card className="mt-6 border-primary/30 bg-primary/5">
-        <CardContent className="pt-5 pb-5">
-          <div className="flex items-center justify-between">
-            <div>
+      <Card className="mt-4 md:mt-6 border-primary/30 bg-primary/5">
+        <CardContent className="pt-4 pb-4 md:pt-5 md:pb-5">
+          <div className="flex items-center justify-between gap-4">
+            <div className="min-w-0">
               <h3 className="font-semibold text-sm text-foreground">Ready for the real thing?</h3>
-              <p className="text-xs text-muted-foreground mt-0.5">3 full past-paper exam scenarios with model answers and self-marking</p>
+              <p className="text-xs text-muted-foreground mt-0.5 hidden md:block">3 full past-paper exam scenarios with model answers and self-marking</p>
             </div>
             <Link href="/exam">
-              <Button data-testid="btn-exam-teaser" size="sm" variant="outline" className="gap-1.5 shrink-0">
-                Exam Simulator <ChevronRight className="w-4 h-4" />
+              <Button data-testid="btn-exam-teaser" size="sm" variant="outline" className="gap-1.5 shrink-0 h-9 md:h-8">
+                Exam <ChevronRight className="w-4 h-4" />
               </Button>
             </Link>
           </div>
